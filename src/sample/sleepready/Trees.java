@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Trees {
 
-    public static class BinaryTreeNode{
-        public BinaryTreeNode left, right;
+    public static class TreeNode{
+        public TreeNode left, right;
         public int data;
-        public BinaryTreeNode(int data, BinaryTreeNode left, BinaryTreeNode right) {
+        public TreeNode(int data, TreeNode left, TreeNode right) {
             this.data = data;
             this.left = left;
             this.right = right;
         }
-        public BinaryTreeNode(int data) {
+        public TreeNode(int data) {
             this.data = data;
         }
 
@@ -20,13 +20,13 @@ public class Trees {
         public String toString() {
             StringBuilder sb = new StringBuilder();
 
-            Queue<BinaryTreeNode> q = new LinkedList<>();
+            Queue<TreeNode> q = new LinkedList<>();
             q.add(this);
             q.add(null);
 
             sb.append("Level order tree print - \n");
             while(!q.isEmpty()){
-                BinaryTreeNode last = q.poll();
+                TreeNode last = q.poll();
                 if(last != null) {
                     sb.append(last.data).append(" ");
                     if (last.left != null)
@@ -44,7 +44,7 @@ public class Trees {
         }
     }
 
-    public static ArrayList<Integer> inOrderRecursive(BinaryTreeNode root, ArrayList<Integer> output){
+    public static ArrayList<Integer> inOrderRecursive(TreeNode root, ArrayList<Integer> output){
         if(root == null) return output;
 
         inOrderRecursive(root.left, output);
@@ -54,7 +54,7 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> postOrderRecursive(BinaryTreeNode root, ArrayList<Integer> output){
+    public static ArrayList<Integer> postOrderRecursive(TreeNode root, ArrayList<Integer> output){
         if(root == null) return output;
 
         postOrderRecursive(root.left, output);
@@ -64,7 +64,7 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> preOrderRecursive(BinaryTreeNode root, ArrayList<Integer> output){
+    public static ArrayList<Integer> preOrderRecursive(TreeNode root, ArrayList<Integer> output){
         if(root == null) return output;
 
         output.add(root.data);
@@ -74,11 +74,11 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> inorderIterative(BinaryTreeNode root){
+    public static ArrayList<Integer> inorderIterative(TreeNode root){
         ArrayList<Integer> output = new ArrayList<>();
-        Stack<BinaryTreeNode> s = new Stack<>();
+        Stack<TreeNode> s = new Stack<>();
 
-        BinaryTreeNode curr = root;
+        TreeNode curr = root;
         while (!s.isEmpty() || curr != null) { // run till stack and curr both aren't empty or null
             if (curr != null) { // go to extreme left
                 s.push(curr);
@@ -95,14 +95,14 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> postorderIterative(BinaryTreeNode root){
+    public static ArrayList<Integer> postorderIterative(TreeNode root){
         ArrayList<Integer> output = new ArrayList<>();
-        Stack<BinaryTreeNode> s1 = new Stack<>();
-        Stack<BinaryTreeNode> s2 = new Stack<>();
+        Stack<TreeNode> s1 = new Stack<>();
+        Stack<TreeNode> s2 = new Stack<>();
 
         s1.push(root);
         while(!s1.isEmpty()){
-            BinaryTreeNode cur = s1.pop();
+            TreeNode cur = s1.pop();
             s2.push(cur);
 
             if(cur.left != null)
@@ -118,12 +118,12 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> preorderIterative(BinaryTreeNode root){
+    public static ArrayList<Integer> preorderIterative(TreeNode root){
         ArrayList<Integer> output = new ArrayList<>();
-        Stack<BinaryTreeNode> s = new Stack<>();
+        Stack<TreeNode> s = new Stack<>();
         s.push(root);
         while(!s.isEmpty()){
-            BinaryTreeNode cur = s.pop();
+            TreeNode cur = s.pop();
             output.add(cur.data);
             if(cur.right != null)
                 s.push(cur.right);
@@ -134,7 +134,7 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> dfs(BinaryTreeNode root, ArrayList<Integer> output){
+    public static ArrayList<Integer> dfs(TreeNode root, ArrayList<Integer> output){
         if(root == null) return output;
 
         output.add(root.data);
@@ -145,12 +145,12 @@ public class Trees {
         return output;
     }
 
-    public static ArrayList<Integer> levelOrderIterative(BinaryTreeNode root){ // BFS
+    public static ArrayList<Integer> levelOrderIterative(TreeNode root){ // BFS
         ArrayList<Integer> output = new ArrayList<>();
-        Queue<BinaryTreeNode> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         while(!q.isEmpty()){
-            BinaryTreeNode last = q.poll();
+            TreeNode last = q.poll();
             output.add(last.data);
 
             if(last.left != null){
@@ -167,7 +167,7 @@ public class Trees {
 
     public static void main(String[] args) {
         //Sleep ready codes
-        BinaryTreeNode root = new BinaryTreeNode(1, new BinaryTreeNode(2, new BinaryTreeNode(4), new BinaryTreeNode(5)), new BinaryTreeNode(3, new BinaryTreeNode(6), new BinaryTreeNode(7)));
+        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3, new TreeNode(6), new TreeNode(7)));
         System.out.println("***** TREES *****");
         System.out.println(root);
         System.out.println("Level order Iterative / BFS " + levelOrderIterative(root)); // easiest
