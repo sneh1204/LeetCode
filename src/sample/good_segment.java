@@ -7,7 +7,7 @@ public class good_segment {
     private static int getLongestSegment(int[] badNumbers, int lower, int upper) {
         if(badNumbers == null || badNumbers.length <= 0) return 0; // null check
 
-        int longest = 0, lastNumber = lower + 1;
+        int longest = 0, lastNumber = lower;
 
         Arrays.sort(badNumbers);
 
@@ -20,7 +20,7 @@ public class good_segment {
         }
 
         if(upper > lastNumber){ // right check
-            longest = Math.max(longest, upper - lastNumber);
+            longest = Math.max(longest, upper - lastNumber + 1);
         }
 
         return longest;

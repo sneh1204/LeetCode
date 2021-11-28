@@ -1,6 +1,8 @@
 package sample.sleepready;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Problems {
@@ -42,6 +44,50 @@ public class Problems {
             return true;
 
         return findElementRecursive(root.left, toFind) || findElementRecursive(root.right, toFind);
+    }
+
+    public static List<Integer> res = new ArrayList<>();
+
+    public static void largestValuesDFS(Trees.TreeNode root, int height){
+        if(root == null) return;
+
+        if(res.size() <= height)
+            res.add(root.data);
+        else
+            res.set(height, Math.max(res.get(height), root.data));
+
+        largestValuesDFS(root.left, height + 1);
+        largestValuesDFS(root.right, height + 1);
+    }
+
+    public static List<Integer> largestValues(Trees.TreeNode root){
+        // TC - O(V)
+        // SC - O(V)
+        if(root == null) return new ArrayList<>();
+
+        List<Integer> result = new ArrayList<>();
+        Queue<Trees.TreeNode> bfs = new LinkedList<>();
+
+        bfs.add(root);
+        bfs.add(null);
+        int max = Integer.MIN_VALUE;
+
+        while(!bfs.isEmpty()){
+            Trees.TreeNode cur = bfs.poll();
+
+            if(cur != null){
+                max = Math.max(max, cur.data);
+                if(cur.left != null) bfs.add(cur.left);
+                if(cur.right != null) bfs.add(cur.right);
+            }else{
+                result.add(max);
+                max = Integer.MIN_VALUE;
+                if(!bfs.isEmpty())
+                    bfs.add(null);
+            }
+        }
+
+        return result;
     }
 
     public static Integer findMaxInTreeIterative(Trees.TreeNode root){

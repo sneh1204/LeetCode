@@ -18,6 +18,10 @@ public class Trees {
 
         @Override
         public String toString() {
+            return "data=" + data;
+        }
+
+        public String print() {
             StringBuilder sb = new StringBuilder();
 
             Queue<TreeNode> q = new LinkedList<>();
@@ -169,7 +173,7 @@ public class Trees {
         //Sleep ready codes
         TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3, new TreeNode(6), new TreeNode(7)));
         System.out.println("***** TREES *****");
-        System.out.println(root);
+        System.out.println(root.print());
         System.out.println("Level order Iterative / BFS " + levelOrderIterative(root)); // easiest
 
         System.out.println("PreOrder Iterative - " + preorderIterative(root)); // easier than others, learn this to use
@@ -187,6 +191,9 @@ public class Trees {
         System.out.println("***** PROBLEMS *****");
         System.out.println("Find Max Recursive - " + Problems.findMaxInTree(root, Integer.MIN_VALUE));
         System.out.println("Find Max Iterative - " + Problems.findMaxInTreeIterative(root));
+        System.out.println("Find Max in Each Level Iterative - " + Problems.largestValues(root));
+        Problems.largestValuesDFS(root, 0);
+        System.out.println("Find Max in Each Level Iterative DFS - " + Problems.res);
         System.out.println("Find Element Recursive - " + Problems.findElementRecursive(root, 7));
 
         Problems.insertElementRecursive(root, 8); // assuming root != null
